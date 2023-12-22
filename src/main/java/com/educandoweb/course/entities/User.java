@@ -3,9 +3,20 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_user")
+//Como a table com nome 'user' é reservado pelo proprio sistema, criamos uma personalizada para não dar problema
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id //Temos que definir qual será a chave primaria, a que sempre será incrementada a cada adição de objeto na tabela, por padrão é sempre o Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	private String name;
 	private String email;
