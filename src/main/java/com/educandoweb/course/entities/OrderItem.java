@@ -66,6 +66,10 @@ public class OrderItem implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	public Double getSubTotal() { //No java EE é pego apenas o get da função, por isso temos que colocar get antes do nome da função
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {

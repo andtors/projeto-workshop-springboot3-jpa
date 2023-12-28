@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Payment implements Serializable{
 	private Instant moment;
 	
 	//Como pode haver ordens sem pagamento, a classe payment é totalmente dependente da classe ordem, não pode existir sozinha
+	@JsonIgnore
 	@OneToOne 
 	@MapsId
 	private Order order;
@@ -61,6 +64,7 @@ public class Payment implements Serializable{
 		this.order = order;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
