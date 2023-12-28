@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,12 +37,14 @@ public class Order implements Serializable {
 
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
-	
+
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)//Em casos de mapeamente de objetos OneToOne para o Id de ambos serem iguais temos que colocar o cascade
+	private Payment payment;
+
 	public Order() {
 
 	}
-		
-	
+
 	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
 		this.id = id;
@@ -48,7 +52,7 @@ public class Order implements Serializable {
 		setOrderStatus(orderStatus);
 		this.client = client;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -83,10 +87,18 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
-	public Set<OrderItem> getItems(){
+	public Set<OrderItem> getItems() {
 		return items;
 	}
-	
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
