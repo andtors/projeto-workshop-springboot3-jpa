@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 
 //Quando uma classe depende de outras, temos que criar um ojeto PK instanciando as classes que ela depende, sem a necessidade de criar os costrutores
 @Embeddable
-public class OrdemItemPK implements Serializable{
+public class OrderItemPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
@@ -48,7 +48,7 @@ public class OrdemItemPK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrdemItemPK other = (OrdemItemPK) obj;
+		OrderItemPK other = (OrderItemPK) obj;
 		return Objects.equals(order, other.order) && Objects.equals(product, other.product);
 	}
 	
